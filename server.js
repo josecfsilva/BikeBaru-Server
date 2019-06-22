@@ -5,12 +5,21 @@ const path = require('path');
 
 const app = express();
 
-/* Connection to database */
+
+/* Connection to local database */
+/*
 const connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: 'sql-2019',
     database: 'bike_baru'
+});*/
+/* Connection to local database */
+const connection = mysql.createConnection({
+    host: 'eu-cdbr-west-02.cleardb.net',
+    user: 'b27677399abca5',
+    password: '60784499',
+    database: 'heroku_26c444707dcb2da'
 });
 
 connection.connect(function (err) {
