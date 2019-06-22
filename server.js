@@ -34,8 +34,14 @@ app.get('/', function (req, res) {
 
 /* PARTNERS */
 /* Add */
-app.get('/partners/add', (req, res) => {
-    const { name, nickname, password, circuits, time, events, awards } = req.query;
+app.post('/partners/add', (req, res) => {
+    const name = req.body.name;
+    const nickname = req.body.nickname;
+    const password = req.body.password;
+    const circuits = req.body.circuits;
+    const time = req.body.time;
+    const events = req.body.events;
+    const awards = req.body.awards;
 
     const INSERT_PARTNERS_QUERY = `INSERT INTO partners (name, nickname, password, circuits, time, events, awards) 
     VALUES ('${name}', '${nickname}', '${password}', ${circuits}, '${time}', ${events}, ${awards})`;
@@ -50,8 +56,15 @@ app.get('/partners/add', (req, res) => {
 });
 
 /* Edit */
-app.get('/partners/edit', (req, res) => {
-    const { partner_id, name, nickname, password, circuits, time, events, awards } = req.query;
+app.put('/partners/edit/:id', (req, res) => {
+    const partner_id = req.body.partner_id;
+    const name = req.body.name;
+    const nickname = req.body.nickname;
+    const password = req.body.password;
+    const circuits = req.body.circuits;
+    const time = req.body.time;
+    const events = req.body.events;
+    const awards = req.body.awards;
 
     const EDIT_PARTNERS_QUERY = `UPDATE partners
     SET name = '${name}', nickname = '${nickname}', password = '${password}', circuits = '${circuits}', time = '${time}', events = '${events}', awards = '${awards}'
@@ -67,8 +80,8 @@ app.get('/partners/edit', (req, res) => {
 });
 
 /* Delete */
-app.get('/partners/delete', (req, res) => {
-    const { partner_id } = req.query;
+app.delete('/partners/delete/:id', (req, res) => {
+    const partner_id = req.params.id;
 
     const DELETE_PARTNERS_QUERY = `DELETE FROM partners WHERE partner_id='${partner_id}';`
 
