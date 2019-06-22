@@ -16,6 +16,10 @@ const connection = mysql.createConnection({
 connection.connect(function (err) {
     if (err) throw err;
     console.log("Connected!");
+    
+    setInterval(function () {
+        connection.query('SELECT 1');
+    }, 5000);
 });
 
 app.use(cors());
