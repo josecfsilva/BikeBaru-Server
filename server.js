@@ -6,6 +6,10 @@ const bodyParser = require("body-parser");
 
 const app = express();
 
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(cors());
+
 /* Connection to database */
 const connection = mysql.createConnection({
     host: 'eu-cdbr-west-02.cleardb.net',
@@ -22,10 +26,6 @@ connection.connect(function (err) {
         connection.query('SELECT 1');
     }, 5000);
 });
-
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-app.use(cors());
 
 /* Homepage */
 app.get('/', function (req, res) {

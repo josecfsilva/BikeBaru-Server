@@ -1,4 +1,9 @@
 {
+  "name": "bikebaru-sapp",
+  "version": "1.0.0",
+  "description": "Projeto de Servidor do BikeBaru",
+  "main": "server.js",
+  "author": "José Silva",
   "scripts": {
     "start": "node server.js"
   },
