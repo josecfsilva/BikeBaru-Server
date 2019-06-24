@@ -1,5 +1,6 @@
 const express = require('express');
 const mysql = require('mysql');
+const cors = require('cors');
 const path = require('path');
 const bodyParser = require("body-parser");
 
@@ -8,6 +9,7 @@ const app = express();
 app.use(require('sanitize').middleware);
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(cors());
 
 /* Connection to database */
 const connection = mysql.createConnection({
