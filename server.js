@@ -1,14 +1,13 @@
 const express = require('express');
-const cors = require('cors');
 const mysql = require('mysql');
 const path = require('path');
 const bodyParser = require("body-parser");
 
 const app = express();
 
+app.use(require('sanitize').middleware);
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(cors());
 
 /* Connection to database */
 const connection = mysql.createConnection({
@@ -34,14 +33,14 @@ app.get('/', function (req, res) {
 
 /* PARTNERS */
 /* Add */
-app.post('/partners/add', (req, res) => {
-    const name = req.body.name;
-    const nickname = req.body.nickname;
-    const password = req.body.password;
-    const circuits = req.body.circuits;
-    const time = req.body.time;
-    const events = req.body.events;
-    const awards = req.body.awards;
+app.post('/partners/add',  (req, res) => {
+    const name = req.bodyString('name');
+    const nickname = req.bodyString('nickname');
+    const password = req.bodyString('password');
+    const circuits = req.bodyInt('circuits');
+    const time = req.bodyString('time');
+    const events = req.bodyInt('events');
+    const awards = req.bodyInt('awards');
 
     const INSERT_PARTNERS_QUERY = `INSERT INTO partners (name, nickname, password, circuits, time, events, awards) 
     VALUES ('${name}', '${nickname}', '${password}', ${circuits}, '${time}', ${events}, ${awards})`;
@@ -57,14 +56,14 @@ app.post('/partners/add', (req, res) => {
 
 /* Edit */
 app.put('/partners/edit/:id', (req, res) => {
-    const partner_id = req.body.partner_id;
-    const name = req.body.name;
-    const nickname = req.body.nickname;
-    const password = req.body.password;
-    const circuits = req.body.circuits;
-    const time = req.body.time;
-    const events = req.body.events;
-    const awards = req.body.awards;
+    const partner_id = req.bodyInt('partner_id');
+    const name = req.bodyString('name');
+    const nickname = req.bodyString('nickname');
+    const password = req.bodyString('password');
+    const circuits = req.bodyInt('circuits');
+    const time = req.bodyString('time');
+    const events = req.bodyInt('events');
+    const awards = req.bodyInt('awards');
 
     const EDIT_PARTNERS_QUERY = `UPDATE partners
     SET name = '${name}', nickname = '${nickname}', password = '${password}', circuits = '${circuits}', time = '${time}', events = '${events}', awards = '${awards}'
@@ -81,7 +80,7 @@ app.put('/partners/edit/:id', (req, res) => {
 
 /* Delete */
 app.delete('/partners/delete/:id', (req, res) => {
-    const partner_id = req.params.id;
+    const partner_id = req.paramInt('id');
 
     const DELETE_PARTNERS_QUERY = `DELETE FROM partners WHERE partner_id='${partner_id}';`
 
@@ -112,13 +111,13 @@ app.get('/partners', (req, res) => {
 /* CIRCUITS */
 /* Add */
 app.post('/circuits/add', (req, res) => {
-    const initial_location = req.body.initial_location;
-    const final_location = req.body.final_location;
-    const time = req.body.time;
-    const distance = req.body.distance;
-    const velocity = req.body.velocity;
-    const calories = req.body.calories;
-    const partner_id = req.body.partner_id;
+    const initial_location = req.bodyString('initial_location');
+    const final_location = req.bodyString('final_location');
+    const time = req.bodyString('time');
+    const distance = req.bodyFloat('distance');
+    const velocity = req.bodyFloat('velocity');
+    const calories = req.bodyInt('calories');
+    const partner_id = req.bodyInt('partner_id');
 
     const INSERT_CIRCUITS_QUERY = `INSERT INTO circuits (initial_location, final_location, time, distance, velocity, calories, partner_id) 
     VALUES ('${initial_location}', '${final_location}', '${time}', ${distance}, ${velocity}, ${calories}, ${partner_id})`;
@@ -134,14 +133,14 @@ app.post('/circuits/add', (req, res) => {
 
 /* Edit */
 app.put('/circuits/edit/:id', (req, res) => {
-    const circuit_id = req.body.circuit_id;
-    const initial_location = req.body.initial_location;
-    const final_location = req.body.final_location;
-    const time = req.body.time;
-    const distance = req.body.distance;
-    const velocity = req.body.velocity;
-    const calories = req.body.calories;
-    const partner_id = req.body.partner_id;
+    const circuit_id = req.bodyInt('circuit_id');
+    const initial_location = req.bodyString('initial_location');
+    const final_location = req.bodyString('final_location');
+    const time = req.bodyString('time');
+    const distance = req.bodyFloat('distance');
+    const velocity = req.bodyFloat('velocity');
+    const calories = req.bodyInt('calories');
+    const partner_id = req.bodyInt('partner_id');
 
     const EDIT_CIRCUITS_QUERY = `UPDATE circuits
     SET initial_location = '${initial_location}', final_location = '${final_location}', time = '${time}', distance = '${distance}', velocity = '${velocity}', calories = '${calories}', partner_id = '${partner_id}'
@@ -158,7 +157,7 @@ app.put('/circuits/edit/:id', (req, res) => {
 
 /* Delete */
 app.delete('/circuits/delete/:id', (req, res) => {
-    const circuit_id = req.params.id;
+    const circuit_id = req.paramInt('id');
 
     const DELETE_CIRCUITS_QUERY = `DELETE FROM circuits WHERE circuit_id='${circuit_id}';`
 
