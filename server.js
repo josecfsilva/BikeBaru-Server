@@ -33,6 +33,11 @@ app.get('/', function (req, res) {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
 
+/* Load Test */
+app.get('/loaderio-8cf6c0f47276abcf129b98f5691e13e0/', function (req, res) {
+    res.sendFile(path.join(__dirname, 'loader.html'));
+});
+
 /* PARTNERS */
 /* Add */
 app.post('/partners/add',  (req, res) => {
