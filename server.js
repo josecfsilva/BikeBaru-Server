@@ -35,7 +35,7 @@ app.get('/', function (req, res) {
 
 /* Load Test */
 app.get('/loaderio-8cf6c0f47276abcf129b98f5691e13e0/', function (req, res) {
-    res.sendFile(path.join(__dirname, 'loader.html'));
+    res.sendFile(path.join(__dirname, 'loader.txt'));
 });
 
 /* PARTNERS */
