@@ -14,9 +14,9 @@ app.use(cors());
 /* Connection to database */
 const connection = mysql.createConnection({
     host: 'eu-cdbr-west-02.cleardb.net',
-    user: 'b27677399abca5',
-    password: '60784499',
-    database: 'heroku_26c444707dcb2da'
+    user: 'b8604840bfde86',
+    password: '43469a61',
+    database: 'heroku_f8a46b7758f670e'
 });
 
 connection.connect(function (err) {
