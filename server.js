@@ -34,13 +34,18 @@ app.get('/', function (req, res) {
 });
 
 /* Load Test */
-app.get('/loaderio-a21817f5b3fb83ab85f586599593fe0c', function (req, res) {
+app.get('/loaderio', function (req, res) {
     res.sendFile(path.join(__dirname, 'loader.txt'));
 });
 
 /* Robots File */
-app.get('/robots.txt', function (req, res) {
+app.get('/robots', function (req, res) {
     res.sendFile(path.join(__dirname, 'robots.txt'));
+});
+
+/* Sitemap File */
+app.get('/sitemap', function (req, res) {
+    res.sendFile(path.join(__dirname, 'sitemap.xml'));
 });
 
 /* PARTNERS */
