@@ -39,7 +39,7 @@ app.get('/loaderio-a21817f5b3fb83ab85f586599593fe0c', function (req, res) {
 });
 
 /* Robots File */
-app.get('/robots', function (req, res) {
+app.get('/robots.txt', function (req, res) {
     res.sendFile(path.join(__dirname, 'robots.txt'));
 });
 
